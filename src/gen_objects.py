@@ -222,8 +222,8 @@ class GenObjects:
             if (p0.id == 'Nauvis' and p1.id == 'GSS'):
                 _destination_type = 'orbit'
 
-            init_frames = _s.gen_init_frames(p0, p1, roc_gi, _destination_type)
-            # init_frames = [5, 25, 50, 100, 200, 500, 700]
+            # init_frames = _s.gen_init_frames(p0, p1, roc_gi, _destination_type)
+            init_frames = [5, 25, 50, 100, 200, 500, 700]
 
             for init_frame in init_frames:
 

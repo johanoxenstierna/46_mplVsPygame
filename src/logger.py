@@ -37,7 +37,7 @@ class Logger:
             P.MPL0PYGAME1,
             P.MAP_DIMS[0],
             P.FPS,
-            1,
+            0,
             P.WRITE,
             999,
             999,

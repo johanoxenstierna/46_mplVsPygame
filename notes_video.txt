@@ -1,0 +1,36 @@
+
+Things changed when testing:
+- rocket -> mid_flight -> num_frames=500 AND takeoff: 50
+- gen_objects -> init_frames + 2000 + roc_gi['frames_max'] < P.FRAMES_TOT_BODIES)
+
+========================================================
+
+watch -n 0.5 nvidia-smi
+
+====
+
+[Proposed video title]: "Matplotlib Animations vs Pygame"
+
+CONTENTS:
+- Which looks better?
+- Performance (speed/memory)
+- Ease-of-use
+
+- [Intro draft]. As a Python data scientist I, like the vast majority, use Matplotlib for basic data visualization. Visualization was always an "extension" to the core of my work, compared to "visualization first", "code second" - people, like "animation artists", "graphics engineers" etc.,  they normally work with software that is way more capable than Matplotlib, like Blender, Unity, Godot or OpenGL. ... So you use Python and you've probably used Matplotlib for some visualizations, and now you want to work in the same IDE you always have been working in, to try some animation, without needing to learn Blender/Unity etc. Here's the problem: Matplotlib Animations has its limits, and I've reached the exact point when one can see this limit [Show stutter problem animation]: Look at this: These planets stutter.  I've spent many hours trying to figure out why, and more hours doing various complex workarounds to limit this problem. Finally, I became interested in Animation alternatives that have a fix for this problem. I considered trying Manim , but I got this prejudice about it that it's "too mathy". PyQt was another option. But it became Pygame, so "Matplotlib Animations versus Pygame".
+
+
+
+- Clarify that Mpl version is FuncAnimation. I've never even tried ArtistAnimation - maybe one should say a word about that.
+- Summarize the two philosophies: "One of the hidden triumphs of matplotlib: it gives you a high-level animation and rendering API where you don’t need to know graphics fundamentals. It’s intentionally 'mathematical-plotting-first, graphics-second.' (that’s perfect—until it’s not).". "Pygame expects you to build the rendering yourself. You control the framerate, what gets drawn, how things move, and how they’re layered. In exchange for that manual labor, you get performance, flexibility, and GPU acceleration."
+ - Go deeper on point above: A standard mpl user is a data scientist who is highly familiar with numpy and scipy. So that person might come in to the visualization stage with a bunch of not only data but also "data sophistication", like the idea that it would be crazy to do any computations inside the animation loop. As compared to some Pygame kid that knows nothing about data, but starts showing the game-canvas and then starts moving a hero using rect.x += 10. The biggest thing the Pygame kid learns in Pygame, is not somthing like numpy, but rather basic Object Orientation, where you have these default "Hero" objects, that have these coordinates about where the object is, when it's supposed to show and when it isn't. As with any "built-in" library structures, they have strengths and weaknesses: Strength: It allows fast computation. Weakness: See to_surface function: It's crazy that you have to remove alpha channel and then add it later + no built-in write support.
+ - More on GPU: "Matplotlib still renders every frame with CPU — GPU encoding doesn’t help frame gen. Adding h264_nvenc will only shave a few seconds off for encoding (writing?), not rendering". "Each artist goes through a full transform + draw pipeline. Bigger artists = more anti-aliasing, alpha blending, CPU layout check. Matplotlib does no GPU rasterization (explain 'rasterization' more)".
+- Rendering Control: Pygame is less black box, more manual. An example: In mpl, you just set blit=True and live-animation becomes faster. In Pygame, you have to set each object to blit, and this, by extension, leads you to want to understand better what blitting is doing.
+- Leading to this point: Pygame assumes you will use class objects for various things to move around on the canvas, and there are built-in things for that purpose, such as Rect, Surface, and Group. Versus mpl, where the standard usecase is some Python coder who quickly wants to visualize some data, often in a single script.
+- The "stutter" problem (resolution and "smoothness"). Pygame is pixel-first — all transforms happen after rasterization. E.g., you have to do int() before blitting, so it's explicitly working with ints. Matplotlib uses antialiasing and transforms at a floating point vector level before rasterization. E.g., you can feed float points into Affine2D but internally when plotting these will then become ints. This has the problem that the Matplotlib user may think that float point coordinates will be kept, when they won't. When I first encountered the "stutter" problem I thought it was some data-rounding bug on my end. So Pygame is much more clear about what level of "smoothness" one can expect in the animation (i.e. int).
+- Go through the differences in the respective main functions. Include that "==" for a certain frame is convenient and that it cannot fail for this type of program because frames can't be skipped (that's more a real-time problem).
+- Experiments:
+  - Resolution test.
+  - Check RAM usage just before starting the animation loop, and when running it.
+  - Run on laptop.
+
+

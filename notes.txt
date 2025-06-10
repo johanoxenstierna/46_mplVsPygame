@@ -1,0 +1,4 @@
+
+
+
+Drafted logger.py (attached). Please take a look at it and let me know whether something could be changed/improved. I'll fix a dummy first row for logger.npy for the first experiment. The only point that requires a bit of work that I see is point 6 about average size of png's but I'll fix that.

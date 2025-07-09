@@ -112,10 +112,10 @@ class GenObjects:
         if 'Venus' in P.OBJ_TO_SHOW:
             gi = _s.gis['Venus']
             pics_planet = _s.pics['Venus']
-            o1ogun = O1C(o1_id='Venus', gi=gi, pics_planet=pics_planet, parent=o0calidus, type='body')  # THE PIC IS ALWAYS TIED TO 1 INSTANCE?
-            o1ogun.gen_orbit()
-            o1ogun.gen_DL()
-            o0calidus.O1['Venus'] = o1ogun
+            o1venus = O1C(o1_id='Venus', gi=gi, pics_planet=pics_planet, parent=o0calidus, type='body')  # THE PIC IS ALWAYS TIED TO 1 INSTANCE?
+            o1venus.gen_orbit()
+            o1venus.gen_DL()
+            o0calidus.O1['Venus'] = o1venus
 
         if 'Nauvis' in P.OBJ_TO_SHOW:
             gi = _s.gis['Nauvis']

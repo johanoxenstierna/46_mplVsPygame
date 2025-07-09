@@ -18,12 +18,13 @@ class Logger:
         4 Computer (0=laptop, 1=wrkstn)
         5 WRITE  (if not 0, it also specifies an enumerated file-name - that can then be used to fill in visual quality)
         6 Num. png's
-        7 Avg. pixels shown of png's during animation
+        7 Png avg. diameter
         8 Num. dots.
         9 perf_time (sec to generate 1 min)
         10 RAM
         11 VisQuality (manual)
         12 NUM_FRAMES
+        13
 
         NOT INCLUDED IN ARRAY (bcs its subjective/no need for precision and will be discussed instead)
         Ease of use
@@ -110,7 +111,7 @@ if __name__ == "__main__":
     adsf = 5
     rows_to_delete = [19]
     # rows_to_delete = np.argwhere(logger[:, 4] == 7)
-    logger = np.delete(logger, rows_to_delete, axis=0)
+    # logger = np.delete(logger, rows_to_delete, axis=0)
     # np.save('./src/logger.npy', logger)
 
     # Add col: =================

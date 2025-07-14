@@ -127,7 +127,6 @@ time1 = time.perf_counter() - time0
 min_vid = ((P.FRAMES_STOP - P.FRAMES_START) / P.FPS) / 60
 sec_per_1_min = int(time1 / min_vid)
 print("sec_per_1_min: " + str(sec_per_1_min))
-
 _logger.row[9] = int(sec_per_1_min)
 
 if P.WRITE:

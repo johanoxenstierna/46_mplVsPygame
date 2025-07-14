@@ -12,7 +12,7 @@ class Logger:
         '''
         RESULT ARRAY
         0 Experiment num
-        1 Backend
+        1 Backend: 0:mpl, 1:pyg
         2 Resolution
         3 FPS
         4 Computer (0=laptop, 1=wrkstn)
@@ -38,7 +38,7 @@ class Logger:
             P.MPL0PYGAME1,
             P.MAP_DIMS[0],
             P.FPS,
-            0,
+            1,
             P.WRITE,
             999,
             999,
@@ -107,9 +107,9 @@ if __name__ == "__main__":
     # np.save('./src/logger.npy', logger)
 
     # Delete rows ============
-    logger = np.load('./src/logger.npy')
-    adsf = 5
-    rows_to_delete = [19]
+    # logger = np.load('./src/logger.npy')
+    # adsf = 5
+    # rows_to_delete = [19]
     # rows_to_delete = np.argwhere(logger[:, 4] == 7)
     # logger = np.delete(logger, rows_to_delete, axis=0)
     # np.save('./src/logger.npy', logger)
@@ -125,4 +125,17 @@ if __name__ == "__main__":
     # adsf = 5
     # np.save('./src/logger.npy', logger)
 
-    pass
+    # RENAME VID NAMES ============
+    # logger1 = np.load('./src/logger1.npy')
+    # logger1_n = np.copy(logger1[29:])
+    # new_names = np.arange(start=25, stop=34)
+    # logger1_n[1:, 5] = new_names
+
+    # COMBINE 2 LOGS ================
+    # logger0 = np.load('./src/logger0.npy')
+    # logger1 = np.load('./src/logger1.npy')
+    # logger1_n = logger1[29:]
+    # logger1_n[:, 0] = np.arange(start=38, stop=48)
+    # logger = np.vstack((logger0, logger1_n))
+    # np.save('./src/logger.npy', logger)
+

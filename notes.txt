@@ -1,28 +1,2 @@
-Attached. I'm wondering whether there is opportunity to add a parameter like "ZOOM_ON=<o1.id>"
 
-===
-Opening new thread "Image improvement" and it will try replacing an old processing pipeline for showing solar system planets/moons (o1 objects) in the Pygame animation in this project.
-
-The main challenge lies in generating the solar shadow on the o1's as they rotate around it.
-
-The current program does this by blending three o1 png's (each pre-drawn for a certain piece of the orbit) and using alpha arrays that change through time. I want to keep this idea, but instead of using three pre-drawn png's, I want to use a single one and then use open cv (or similar) to generate multiple images that can then be used for blending.
-
-The constructor call for an o1 takes a list of png's as input:
-pics_planet = _s.pics['Venus']
-            o1venus = O1C(o1_id='Venus', gi=gi, pics_planet=pics_planet, parent=o0calidus, type='body')
-
-Note that the animation is in 2D and the o1 pictures can only rotate in 2D. How the o1's do this rotation is another thing that we don't discuss here.
-
-So what I'm looking for is a pre-processing function like gen_orbit_pngs(input_png), where input_png does not have any shadow on it, and that returns:
-A list of say 12 png's, where the 12th one has no shadow, and the 6th one is covered in shadow.
-
-Of relevance is that, while I say the animation is in 2D, it is shown from a tilted perspective such that o1's in front of the sun should have more shadow on their bottom half, and vice versa for o1's behind the sun.
-
-Alternatively, maybe I should ask first: You cannot just imgen me 12 png's of the earth with this requirement? 150x150 pixels each, so perhaps you can do the 12 versions in one image? I suspect it won't work but would love to see you try.
-
-===
-
-Ok, that looks promising. Forget about the rotation I talked about above. Do the following: *Currently, the light is always coming from left or right. But the planet in my animation is orbiting according to a tilt-perspective of say 15 degrees. In other words, there need to be pictures where the light is coming from 'above' or 'below'.
-*Maybe you can think sequentially: What does the planet look like in January, February etc, from a 15 degree perspective lookout far away?
-*Ideally, you also alter the png's in terms of what continents appear in each month.
-*If you can, please generate a sequential collage with 12 pictures, each of which are 200x200 pixels. If you prefer 16 it's also ok but I have to cut them later, so equidistance is definitely preferred.
+Attached updated logger_analysis.py. Please check combine_features(). Now, can you add a bool parameter to gen_2D_scatter "lin_reg_line". I'm thinking a linear regression line will suffice for all results here to show the general picture. I want to be able to say "it's about twice as slow" or "it's about 20x as slow" (or starting at 10x and then grows to 20x with more compute load) without going into more details.

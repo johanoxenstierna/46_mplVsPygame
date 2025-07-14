@@ -1,2 +1,37 @@
 
 Attached updated logger_analysis.py. Please check combine_features(). Now, can you add a bool parameter to gen_2D_scatter "lin_reg_line". I'm thinking a linear regression line will suffice for all results here to show the general picture. I want to be able to say "it's about twice as slow" or "it's about 20x as slow" (or starting at 10x and then grows to 20x with more compute load) without going into more details.
+
+===
+
+Ok good, let's now add legend keys for the plots (I hate Pandas so ...) . The only thing that's there currently is the following docstring, describing the cols in logger.npy (which is strictly int format)
+
+0 Experiment_num
+1 Backend: 0:mpl, 1:pyg
+2 Resolution
+3 FPS
+4 Computer (0=laptop, 1=wrkstn)
+5 WRITE  (if not 0, it also specifies an enumerated file-name - that can then be used to fill in visual quality)
+6 Num. png's
+7 Png avg. diameter
+8 Num. dots.
+9 perf_time (sec to generate 1 min)
+10 RAM
+11 VisQuality (manual)
+12 NUM_FRAMES
+13 ADDED LATER (combined col 6-7)
+
+I suppose this can be transformed into a dict or list that is saved in a separate file and then loaded when plotting, but note some entries have two options (like backend), whereas some are just some number (like RAM). What do you propose?
+
+
+===
+
+Ok works. A problem is that I didn't realize col 8 # dots cannot be properly evaluated given this set up. Basically, the more num png's, the more dots - the number of dots (rockets) depends on num png's (the more origins/destinations the more rockets). So am I right in assuming we cannot use num_dots at all in the analysis, or is there some way to incorporate them (maybe in the combine features function)?
+
+===
+"The weight 5 is arbitrary — the idea is: one dot costs about 5 “effective pixels” of compute time"
+Actually, isn't there a way to test the exact impact of col 8 against col 6 with regard to target col 13. It should be possible with PCA or similar. Like, eliminate the effect of col 6 and then look at remaining effect of col 8. This fits exactly within the scope of the project: We don't do extensive experiments with col 8, but we should at least test it's impact on col 13. Can you propose a function "test_dots_impact" that does this? You can use sklearn if needed.
+
+Starting new chat here because old one got extremely slow. Here's from the old one:
+isn't there a way to test the exact impact of col 8 against col 6 with regard to target col 13? It should be possible with PCA or similar. Like, eliminate the effect of col 6 and then look at remaining effect of col 8. This fits exactly within the scope of the project: We don't do extensive experiments with col 8, but we should at least test it's impact on col 13. Can you propose a function "test_dots_impact" that does this? You can use sklearn if needed.
+
+To this question you asked me to attach the logger. Now that's not what I asked for but I do attach it now. Don't print it. If you can do a quick test of the impact of column 8 on col 13 AFTER first eliminating the effect of col 6, please go ahead and do it. Otherwise share some code to do it using PCA or similar.

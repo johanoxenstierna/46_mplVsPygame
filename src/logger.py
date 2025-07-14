@@ -24,7 +24,7 @@ class Logger:
         10 RAM
         11 VisQuality (manual)
         12 NUM_FRAMES
-        13
+        13 Compute Load (combined col 6-7)
 
         NOT INCLUDED IN ARRAY (bcs its subjective/no need for precision and will be discussed instead)
         Ease of use
